@@ -32,24 +32,13 @@ The SQLite database and output folders are created automatically on the first ru
 
 **Updating an existing checkout:** stop the running server, extract the updated project, activate the same virtual environment, and run `python -m pip install -r requirements.txt` before starting `python app.py` again. The PDF renderer now needs ReportLab.
 
-## Run with Docker
-
-Build and map the app only to the host's loopback interface:
-
-```bash
-docker build -t resumeforge-cmdi .
-docker run --rm --name resumeforge-cmdi -p 127.0.0.1:5000:5000 resumeforge-cmdi
-```
-
-Then open `http://127.0.0.1:5000`. The container runs as a non-root user. This is still an intentionally vulnerable challenge container; do not mount sensitive host directories, the Docker socket, or credentials into it. For a public event, host each challenge instance in a disposable, isolated environment with no access to internal services.
-
 ## Verify the log-output behaviour
 
 1. Generate a normal resume first. The result page should show the PDF engine's status lines under **STDOUT** and a complete run log below.
 2. In the output filename field, enter this lab-only test value:
 
    ```text
-   resume.pdf"; echo INJECTION_PROOF; #
+   resume.pdf"; echo"$(command)"; #
    ```
 
 3. Generate the resume. On Linux, the shell closes the quoted output-path argument at the embedded quote, runs the injected `echo`, and then treats the remainder as a comment. The result page should show both the PDF engine output and `INJECTION_PROOF` in **STDOUT**. The full command and output are also stored in that job's `run.log`.
@@ -66,7 +55,6 @@ resumeforge_cmdi/
 ├── pdf_engine.py          # Styled, vector-based A4 PDF renderer
 ├── flag.txt               # Demo CTF flag
 ├── requirements.txt
-├── Dockerfile
 ├── templates/
 │   ├── index.html         # Portal form
 │   ├── resume.html        # Resume HTML template

@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ student.name }} | Resume for {{ company_name }}</title>
+  <style>
+    :root { --navy:#10243b; --blue:#2159a6; --cyan:#42d6c3; --ink:#1f2937; --muted:#65758b; --line:#dce4ee; --pale:#f3f7fb; }
+    * { box-sizing:border-box; }
+    body { margin:0; padding:30px; background:#e9eef5; color:var(--ink); font-family:Inter,Arial,sans-serif; }
+    .page { max-width:850px; min-height:1050px; margin:0 auto; background:#fff; box-shadow:0 15px 45px #10243b20; }
+    .hero { position:relative; overflow:hidden; padding:44px 48px 30px; color:#fff; background:linear-gradient(125deg,#10243b 0%,#153c65 100%); }
+    .hero:after { content:""; position:absolute; width:240px; height:240px; border:1px solid #ffffff18; border-radius:50%; right:-64px; top:-112px; box-shadow:0 0 0 28px #ffffff08,0 0 0 58px #ffffff05; }
+    .eyebrow { position:relative; z-index:1; margin:0 0 13px; color:var(--cyan); font-size:10px; font-weight:800; letter-spacing:2.4px; text-transform:uppercase; }
+    h1 { position:relative; z-index:1; margin:0; max-width:92%; font-size:34px; line-height:1.1; letter-spacing:-.6px; }
+    .degree { position:relative; z-index:1; margin:10px 0 0; color:#c7d8eb; font-size:13px; }
+    .hero-meta { position:relative; z-index:1; display:flex; flex-wrap:wrap; gap:8px 22px; margin-top:22px; color:#e0eaf5; font-size:10px; }
+    .target { position:relative; z-index:1; display:flex; gap:12px; align-items:center; margin-top:25px; padding:12px 15px; border:1px solid #ffffff22; border-left:3px solid var(--cyan); border-radius:7px; background:#ffffff0b; }
+    .target-label { color:#9db5ce; font-size:9px; font-weight:800; letter-spacing:1.3px; text-transform:uppercase; }
+    .target-name { margin-top:3px; color:#fff; font-size:14px; font-weight:700; }
+    .body-grid { display:grid; grid-template-columns:205px minmax(0,1fr); gap:35px; padding:32px 42px 44px; }
+    aside { padding:22px 20px; background:var(--pale); border-radius:9px; }
+    section { margin:0 0 27px; }
+    section:last-child { margin-bottom:0; }
+    h2 { display:flex; align-items:center; gap:9px; margin:0 0 13px; color:var(--navy); font-size:11px; letter-spacing:1.4px; text-transform:uppercase; }
+    h2:before { content:""; width:19px; height:3px; border-radius:4px; background:var(--cyan); }
+    p { margin:0; font-size:11px; line-height:1.7; }
+    .contact-item { margin:0 0 11px; }
+    .contact-label { display:block; margin-bottom:3px; color:var(--muted); font-size:8px; font-weight:800; letter-spacing:1px; text-transform:uppercase; }
+    .contact-value { overflow-wrap:anywhere; color:#25364a; font-size:10px; line-height:1.5; }
+    .skill-list { display:flex; flex-wrap:wrap; gap:6px; }
+    .skill { padding:6px 8px; border:1px solid #d9e5f0; border-radius:5px; background:#fff; color:#284b72; font-size:9px; font-weight:700; }
+    .edu-degree { font-size:10px; font-weight:700; line-height:1.5; }
+    .edu-meta { margin-top:5px; color:var(--muted); font-size:9px; line-height:1.6; }
+    .cgpa { display:inline-block; margin-top:9px; padding:5px 8px; border-radius:5px; color:#11665d; background:#dff8f3; font-size:9px; font-weight:800; }
+    .main section { margin-bottom:29px; }
+    .main h2 { padding-bottom:10px; border-bottom:1px solid var(--line); font-size:12px; }
+    .summary { color:#425166; font-size:11px; line-height:1.85; }
+    .project { position:relative; margin:0 0 19px; padding:0 0 0 15px; }
+    .project:before { content:""; position:absolute; top:4px; bottom:1px; left:0; width:3px; border-radius:3px; background:#ccefe9; }
+    .project h3 { margin:0 0 6px; color:#1e3b5b; font-size:12px; }
+    .project p { color:#526176; font-size:10.5px; line-height:1.7; }
+    .footer { display:flex; justify-content:space-between; gap:15px; padding:16px 42px; border-top:1px solid var(--line); color:#8190a3; font-size:8px; letter-spacing:.7px; text-transform:uppercase; }
+    @media(max-width:650px) { body{padding:0}.page{min-height:100vh}.hero{padding:30px 24px}.body-grid{grid-template-columns:1fr;gap:20px;padding:24px}.footer{padding:15px 24px;flex-wrap:wrap} }
+    @media print { body{padding:0;background:#fff}.page{box-shadow:none;max-width:none;min-height:0}.hero,.target,.skill,.cgpa,.project:before{-webkit-print-color-adjust:exact;print-color-adjust:exact} }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="hero">
+      <p class="eyebrow">ResumeForge / Student Portfolio</p>
+      <h1>{{ student.name }}</h1>
+      <p class="degree">{{ student.branch }} &nbsp;|&nbsp; Roll No. {{ student.roll_no }}</p>
+      <div class="hero-meta"><span>{{ student.email }}</span><span>{{ student.phone }}</span></div>
+      <div class="target"><div><div class="target-label">Prepared for</div><div class="target-name">{{ company_name }}</div></div></div>
+    </header>
+
+    <div class="body-grid">
+      <aside>
+        <section>
+          <h2>Contact</h2>
+          <div class="contact-item"><span class="contact-label">Email</span><div class="contact-value">{{ student.email }}</div></div>
+          <div class="contact-item"><span class="contact-label">Phone</span><div class="contact-value">{{ student.phone }}</div></div>
+          <div class="contact-item"><span class="contact-label">Student ID</span><div class="contact-value">{{ student.roll_no }}</div></div>
+        </section>
+        <section>
+          <h2>Technical Skills</h2>
+          <div class="skill-list">{% for skill in student.skills %}<span class="skill">{{ skill }}</span>{% endfor %}</div>
+        </section>
+        <section>
+          <h2>Education</h2>
+          <div class="edu-degree">{{ student.branch }}</div>
+          <div class="edu-meta">Undergraduate Student<br>Campus Placement Profile</div>
+          <div class="cgpa">CGPA &nbsp; {{ '%.2f'|format(student.cgpa) }} / 10</div>
+        </section>
+      </aside>
+
+      <main class="main">
+        <section>
+          <h2>Professional Profile</h2>
+          <p class="summary">{{ student.summary }}</p>
+        </section>
+        <section>
+          <h2>Selected Projects</h2>
+          {% for project in student.projects %}
+          <article class="project"><h3>{{ project.project_title }}</h3><p>{{ project.project_summary }}</p></article>
+          {% endfor %}
+        </section>
+      </main>
+    </div>
+    <footer class="footer"><span>ResumeForge · Campus Placement Office</span><span>Prepared for {{ company_name }}</span></footer>
+  </div>
+
+  <!-- Structured fields consumed by the portable PDF renderer. -->
+  <div hidden
+    data-pdf-name="{{ student.name }}"
+    data-pdf-branch="{{ student.branch }}"
+    data-pdf-roll="{{ student.roll_no }}"
+    data-pdf-email="{{ student.email }}"
+    data-pdf-phone="{{ student.phone }}"
+    data-pdf-cgpa="{{ '%.2f'|format(student.cgpa) }}"
+    data-pdf-company="{{ company_name }}"
+    data-pdf-summary="{{ student.summary }}"
+    data-pdf-skills='{{ student.skills|tojson|forceescape }}'
+    data-pdf-projects='{{ student.projects|tojson|forceescape }}'></div>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ResumeForge | Campus Placement Portal</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand-mark">RF</div>
+    <div>
+      <div class="brand-name">ResumeForge</div>
+      <div class="brand-subtitle">Campus Placement Portal</div>
+    </div>
+    <span class="status-pill"><span class="status-dot"></span> Placement services online</span>
+  </header>
+
+  <main class="page-shell">
+    <section class="hero">
+      <p class="eyebrow">CAREER SERVICES · PDF EXPORT</p>
+      <h1>Build your next application.</h1>
+      <p class="hero-copy">Generate a company-specific resume from a stored student profile and export it as a PDF.</p>
+      <div class="hero-meta"><span>● Profile-backed</span><span>● PDF output</span><span>● Instant export</span></div>
+    </section>
+
+    <section class="content-grid">
+      <div class="panel form-panel">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">NEW DOCUMENT</p>
+            <h2>Generate resume</h2>
+          </div>
+          <span class="step-number">01 / 01</span>
+        </div>
+        <form action="{{ url_for('generate') }}" method="post">
+          <label for="student_id">Student profile</label>
+          <select id="student_id" name="student_id" required>
+            {% for student in students %}
+            <option value="{{ student.id }}">{{ student.name }} · {{ student.roll_no }} · {{ student.branch }}</option>
+            {% endfor %}
+          </select>
+
+          <label for="company_name">Target company</label>
+          <input id="company_name" name="company_name" type="text" maxlength="80" placeholder="e.g. Example Technologies" required>
+          <p class="field-hint">Used in the resume header and application line.</p>
+
+          <label for="output_filename">Output filename</label>
+          <div class="filename-input">
+            <input id="output_filename" name="output_filename" type="text" maxlength="120" value="resume.pdf" required>
+            <span>.PDF</span>
+          </div>
+          <p class="field-hint">Name the exported file for easy identification.</p>
+
+          <button type="submit">Generate PDF <span aria-hidden="true">↗</span></button>
+        </form>
+        <div class="privacy-note"><span aria-hidden="true">◈</span><p>Demo profiles use synthetic data. This application is a deliberately vulnerable local CTF lab.</p></div>
+      </div>
+
+      <aside class="panel side-panel">
+        <div class="side-icon">▤</div>
+        <p class="eyebrow">HOW IT WORKS</p>
+        <h2>From profile to PDF</h2>
+        <ol class="workflow">
+          <li><span>1</span><div><strong>Choose a profile</strong><p>Student records are fetched from SQLite.</p></div></li>
+          <li><span>2</span><div><strong>Personalize</strong><p>Add the target company to the resume header.</p></div></li>
+          <li><span>3</span><div><strong>Export</strong><p>The server renders HTML and invokes its PDF engine.</p></div></li>
+        </ol>
+        <div class="engine-card"><div class="engine-mark">PDF</div><div><strong>Resume rendering engine</strong><p>HTML → PDF · Server-side conversion</p></div><span class="engine-check">✓</span></div>
+      </aside>
+    </section>
+    <footer><span>ResumeForge · Placement Office</span><span>Demo environment · Do not use real personal data</span></footer>
+  </main>
+</body>
+</html>

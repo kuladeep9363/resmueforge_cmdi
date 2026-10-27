@@ -14,7 +14,7 @@ A small Flask-based placement portal for a **local, intentionally vulnerable CTF
 - Per-job run logs saved to `instance/generated/<job-id>/run.log`
 - Result page displays captured `stdout`, `stderr`, command, return code, and PDF status
 - A demo flag in `flag.txt`
-- Default development bind is `127.0.0.1`
+
 
 ## Run locally (Linux/Kali)
 
@@ -26,7 +26,7 @@ python -m pip install -r requirements.txt
 python app.py
 ```
 
-Open `http://127.0.0.1:5000`.
+Open `http://0.0.0.0:5000`.
 
 The SQLite database and output folders are created automatically on the first run. The app binds to localhost by default. Use only fake demo data.
 
